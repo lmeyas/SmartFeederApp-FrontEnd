@@ -1,11 +1,10 @@
 <template>
-  <v-app>
-    <router-view/>
-  </v-app>
+  <p>SETTINGS</p>
 </template>
 
 <script>
+export default {};
 </script>
 
- <style>
+<style>
 </style>
