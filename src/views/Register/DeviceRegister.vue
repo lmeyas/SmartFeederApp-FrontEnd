@@ -17,39 +17,33 @@
           <v-card-title class="cardTittle">Registo do Dispositivo</v-card-title>
           <v-card-text>
             <v-form>
-              <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                :counter="10"
-                label="Número de Refeições"
-                prepend-icon="person"
-                required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
-              ></v-text-field>
-              <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="Raça"
-                prepend-icon="email"
-                required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
-              ></v-text-field>
+              <p>Número de Refeições</p>
+              <v-slider v-model="value" :max="10" persistent-hint step="1" thumb-label ticks></v-slider>
+              <v-btn block color="primary" to="/dashboard">Ok</v-btn>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-container>
+    <v-layout row wrap fill-height fill-width justify-center class="mx-auto">
+      <v-container grid-list-md text-xs-center>
+        <v-layout row wrap>
+          <v-card-text>
+            <v-form>
               <v-text-field
                 v-model="email"
-                :rules="emailRules"
-                label="Idade"
-                prepend-icon="email"
+                :rules="timeRules"
+                label="Horário"
+                prepend-icon="alarm"
                 required
                 @input="$v.email.$touch()"
                 @blur="$v.email.$touch()"
               ></v-text-field>
               <v-text-field
                 v-model="email"
-                :rules="emailRules"
-                label="Peso (kg)"
-                prepend-icon="email"
+                :rules="qtdRules"
+                label="Quantidade"
+                prepend-icon="restaurant"
                 required
                 @input="$v.email.$touch()"
                 @blur="$v.email.$touch()"
@@ -61,9 +55,9 @@
             <!-- <v-btn block color="primary" @click="submit">Ok</v-btn> -->
             <v-btn block color="primary" to="/dashboard">Ok</v-btn>
           </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-container>
+        </v-layout>
+      </v-container>
+    </v-layout>
   </div>
 </template>
 
@@ -80,22 +74,17 @@ export default {
 
   data: () => ({
     valid: false,
-    name: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters',
+    time: '',
+    timeRules: [
+      v => !!v || 'Hora  é obrigatório',
+      v => v.length <= 2 || 'Hora must be less than 2 characters',
     ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+/.test(v) || 'E-mail must be valid',
+    valid: false,
+    qtd: '',
+    qtdRules: [
+      v => !!v || 'Quantidade  é obrigatório',
+      v => v.length <= 2 || 'Quantidade must be less than 2 characters',
     ],
-    showPassword: false,
-    passwordRules: {
-      required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Min 8 characters',
-      passwordMatch: () => 'Password must be less than 10 characters',
-    },
   }),
   methods: {
     submit() {

@@ -18,7 +18,7 @@
           <v-card-text>
             <v-form>
               <v-flex xs12>
-                <v-combobox v-model="select" :items="items" chips label="Selecione o tipo">
+                <v-combobox v-model="select" :items="items" chips label="Selecione a espécie">
                   <template v-slot:selection="data">
                     <v-chip
                       :key="JSON.stringify(data.item)"

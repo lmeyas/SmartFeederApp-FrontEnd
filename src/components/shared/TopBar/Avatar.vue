@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-avatar size="35px" color="grey lighten-4">
+    <v-avatar size="41px" color="grey lighten-4">
       <!--img :src="this.userPhoto" alt="avatar"-->
       <img src="../../../assets/images/user-eu.png" alt="avatar">
     </v-avatar>
