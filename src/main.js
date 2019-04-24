@@ -18,6 +18,7 @@ Vue.use(Vuetify, {
     deviceCard: '#f4ba82',
     medicineCard: '#6FADD1',
     darkText: '#24272a',
+    buttonAdd: '#0c084c',
   },
 });
 Vue.use(Vuelidate);

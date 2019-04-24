@@ -45,31 +45,31 @@
                 @blur="$v.name.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="email"
-                :rules="emailRules"
+                v-model="raca"
+                :rules="racaRules"
                 label="Raça"
-                prepend-icon="email"
+                prepend-icon="pets"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @input="$v.raca.$touch()"
+                @blur="$v.raca.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="email"
-                :rules="emailRules"
+                v-model="age"
+                :rules="ageRules"
                 label="Idade"
                 prepend-icon="email"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @input="$v.age.$touch()"
+                @blur="$v.age.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="email"
-                :rules="emailRules"
+                v-model="weight"
+                :rules="weightRules"
                 label="Peso (kg)"
                 prepend-icon="email"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @input="$v.weight.$touch()"
+                @blur="$v.weight.$touch()"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -94,25 +94,29 @@ export default {
     name: { required, maxLength: maxLength(10) },
     email: { required, email },
   },
-
   data: () => ({
     valid: false,
     name: '',
+    items: ['Gato', 'Cachorro'],
     nameRules: [
       v => !!v || 'Name is required',
       v => v.length <= 10 || 'Name must be less than 10 characters',
     ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+/.test(v) || 'E-mail must be valid',
+    raca: '',
+    racaRules: [
+      v => !!v || 'Name is required',
+      v => v.length <= 3 || 'Name must be less than 3 characters',
     ],
-    showPassword: false,
-    passwordRules: {
-      required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Min 8 characters',
-      passwordMatch: () => 'Password must be less than 10 characters',
-    },
+    age: '',
+    ageRules: [
+      v => !!v || 'Name is required',
+      v => v.length <= 1 || 'Name must be less than 1 characters',
+    ],
+    weight: '',
+    weightRules: [
+      v => !!v || 'Weight is required',
+      v => v.length <= 2 || 'Weight must be less than 2 characters',
+    ],
   }),
   methods: {
     submit() {
@@ -124,11 +128,6 @@ export default {
       this.email = '';
       this.password = '';
     },
-  },
-  data() {
-    return {
-      items: ['Gato', 'Cachorro'],
-    };
   },
 };
 </script>

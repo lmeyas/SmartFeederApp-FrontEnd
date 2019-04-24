@@ -14,50 +14,42 @@
     <v-container fill-height class="deviceForm">
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-12">
-          <v-card-title class="cardTittle">Registo do Dispositivo</v-card-title>
+          <v-card-title class="cardTittle">Registo do Comedouro</v-card-title>
           <v-card-text>
             <v-form>
-              <p>Número de Refeições</p>
-              <v-slider v-model="value" :max="10" persistent-hint step="1" thumb-label ticks></v-slider>
-              <v-btn block color="primary" to="/dashboard">Ok</v-btn>
+              <p>Refeições cadastradas</p>
+              <!-- <v-slider v-model="value" :max="10" persistent-hint step="1" thumb-label ticks></v-slider>
+              <v-btn block color="primary" to="/dashboard">Ok</v-btn>-->
+              <v-btn
+                fab
+                small
+                color="buttonAdd"
+                dark
+                bottom
+                right
+                absolute
+                @click="dialog = !dialog"
+              >
+                <v-icon>add</v-icon>
+              </v-btn>
             </v-form>
           </v-card-text>
+          <v-dialog v-model="dialog" max-width="500px">
+            <v-card>
+              <v-card-text>
+                <p>Cadastro de Refeição</p>
+                <v-text-field label="Quatidade de ração (g)"></v-text-field>
+                <v-text-field label="Horário da Refeição"></v-text-field>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat color="primary" @click="dialog = false">ADD</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card>
       </v-flex>
     </v-container>
-    <v-layout row wrap fill-height fill-width justify-center class="mx-auto">
-      <v-container grid-list-md text-xs-center>
-        <v-layout row wrap>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                v-model="email"
-                :rules="timeRules"
-                label="Horário"
-                prepend-icon="alarm"
-                required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
-              ></v-text-field>
-              <v-text-field
-                v-model="email"
-                :rules="qtdRules"
-                label="Quantidade"
-                prepend-icon="restaurant"
-                required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn block color="primary" @click="clear">Clear</v-btn>
-            <!-- <v-btn block color="primary" @click="submit">Ok</v-btn> -->
-            <v-btn block color="primary" to="/dashboard">Ok</v-btn>
-          </v-card-actions>
-        </v-layout>
-      </v-container>
-    </v-layout>
   </div>
 </template>
 
@@ -74,15 +66,16 @@ export default {
 
   data: () => ({
     valid: false,
+    dialog: false,
     time: '',
     timeRules: [
-      v => !!v || 'Hora  é obrigatório',
+      v => !!v || 'Hora é obrigatório',
       v => v.length <= 2 || 'Hora must be less than 2 characters',
     ],
     valid: false,
     qtd: '',
     qtdRules: [
-      v => !!v || 'Quantidade  é obrigatório',
+      v => !!v || 'Quantidade é obrigatório',
       v => v.length <= 2 || 'Quantidade must be less than 2 characters',
     ],
   }),
