@@ -18,7 +18,7 @@
           <v-card-text>
             <v-form>
               <v-flex xs12>
-                <v-combobox v-model="select" :items="items" chips label="Selecione a espécie">
+                <v-combobox v-model="petInformations.specie" :items="items" chips label="Selecione a espécie">
                   <template v-slot:selection="data">
                     <v-chip
                       :key="JSON.stringify(data.item)"
@@ -35,48 +35,40 @@
                 </v-combobox>
               </v-flex>
               <v-text-field
-                v-model="name"
+                v-model="petInformations.name"
                 :rules="nameRules"
                 :counter="10"
                 label="Nome"
                 prepend-icon="person"
                 required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="raca"
-                :rules="racaRules"
+                v-model="petInformations.breed"
+                :rules="breedRules"
                 label="Raça"
                 prepend-icon="pets"
                 required
-                @input="$v.raca.$touch()"
-                @blur="$v.raca.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="age"
+                v-model="petInformations.age"
                 :rules="ageRules"
                 label="Idade"
                 prepend-icon="email"
                 required
-                @input="$v.age.$touch()"
-                @blur="$v.age.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="weight"
+                v-model="petInformations.weight"
                 :rules="weightRules"
                 label="Peso (kg)"
                 prepend-icon="email"
                 required
-                @input="$v.weight.$touch()"
-                @blur="$v.weight.$touch()"
               ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-btn block color="primary" @click="clear">Clear</v-btn>
-            <!-- <v-btn block color="primary" @click="submit">Ok</v-btn> -->
-            <v-btn block color="primary" to="/deviceRegister">Next</v-btn>
+            <!-- <v-btn block color="primary" @click="addToAPI">Ok</v-btn> -->
+            <v-btn block color="primary" @click='addToAPI' to="/deviceRegister" >Next</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -85,15 +77,10 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate';
-import { required, maxLength, email } from 'vuelidate/lib/validators';
+import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
-  mixins: [validationMixin],
-  validations: {
-    name: { required, maxLength: maxLength(10) },
-    email: { required, email },
-  },
   data: () => ({
     valid: false,
     name: '',
@@ -102,8 +89,8 @@ export default {
       v => !!v || 'Name is required',
       v => v.length <= 10 || 'Name must be less than 10 characters',
     ],
-    raca: '',
-    racaRules: [
+    breed: '',
+    breedRules: [
       v => !!v || 'Name is required',
       v => v.length <= 3 || 'Name must be less than 3 characters',
     ],
@@ -117,8 +104,32 @@ export default {
       v => !!v || 'Weight is required',
       v => v.length <= 2 || 'Weight must be less than 2 characters',
     ],
+    petInformations: {
+      specie: '',
+      name: '',
+      breed: '',
+      age: '',
+      weight: '',
+    },
   }),
+  computed: {
+    ...mapGetters([
+      'serverUrl', 'userInformation',
+    ]),
+  },
   methods: {
+    addToAPI() {
+      console.log(this.petInformations);
+
+      axios.post(`${this.serverUrl}pets/register`, this.petInformations)
+        .then((res) => {
+          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     submit() {
       this.$v.$touch();
     },

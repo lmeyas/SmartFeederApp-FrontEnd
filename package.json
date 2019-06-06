@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "watch": "vue-cli-service build --watch --mode development",
     "cordova-build-android": "vue-cli-service cordova-build-android",
     "cordova-build-browser": "vue-cli-service cordova-build-browser",
     "cordova-build-ios": "vue-cli-service cordova-build-ios",
@@ -17,12 +18,13 @@
     "cordova-serve-osx": "vue-cli-service cordova-serve-osx"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.7.4",
     "vuetify": "^1.5.5",
-    "vuex": "^3.0.1"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
