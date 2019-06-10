@@ -6,27 +6,22 @@
           <v-card-text>
             <v-form>
               <v-text-field
-                v-model="name"
+                v-model="userInformations.name"
                 :rules="nameRules"
-                :counter="10"
                 label="Full Name"
                 prepend-icon="person"
                 required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="email"
+                v-model="userInformations.email"
                 :rules="emailRules"
                 label="E-mail"
                 prepend-icon="email"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
               ></v-text-field>
               <v-text-field
                 id="password"
-                v-model="password"
+                v-model="userInformations.password"
                 prepend-icon="lock"
                 label="Password"
                 :rules="passwordMatch"
@@ -34,13 +29,11 @@
                 :type="showPassword ? 'text' : 'password'"
                 counter
                 @click:append="showPassword = !showPassword"
-                @input="$v.password.$touch()"
-                @blur="$v.password.$touch()"
               ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn block color="primary" @click="submit">Ok</v-btn>
+            <v-btn block color="primary" @click="addToAPI">Ok</v-btn>
             <v-btn block color="primary" @click="clear">Clear</v-btn>
           </v-card-actions>
         </v-card>
@@ -56,12 +49,9 @@ import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     valid: false,
-    name: '',
     nameRules: [
       v => !!v || 'Name is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters',
     ],
-    email: '',
     emailRules: [
       v => !!v || 'E-mail is required',
       v => /.+@.+/.test(v) || 'E-mail must be valid',
@@ -80,7 +70,7 @@ export default {
   }),
   computed: {
     ...mapGetters([
-      'serverUrl', 'userInformation',
+      'serverUrl',
     ]),
   },
   methods: {
