@@ -186,7 +186,7 @@ export default {
     addToAPI() {
       console.log(this.mealList);
 
-      axios.post(`${this.serverUrl}devices/register`, this.mealList)
+      axios.post(`${this.serverUrl}devices/register`, { mealList: this.mealList })
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
           console.log(res);

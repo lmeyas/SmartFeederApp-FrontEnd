@@ -5,11 +5,11 @@
         <v-card class="elevation-12">
           <v-card-text>
             <v-form>
-              <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
+              <v-text-field prepend-icon="person" v-model="userInformations.email" label="Login" type="text"></v-text-field>
               <v-text-field
                 id="password"
+                v-model="userInformations.password"
                 prepend-icon="lock"
-                name="password"
                 label="Password"
                 type="password"
               ></v-text-field>
@@ -19,7 +19,7 @@
             <v-btn id="createAccount" block flat color="primary">
               <router-link to="/createAccount">Create account</router-link>
             </v-btn>
-            <v-btn block color="primary dark" to="/petRegister">Login</v-btn>
+            <v-btn block color="primary dark"  @click="addToAPI">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -28,7 +28,46 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+import { mapGetters } from 'vuex';
+
+
+export default {
+  data: () => ({
+    valid: false,
+    userInformations: {
+      email: '',
+      passoword: '',
+    },
+  }),
+  computed: {
+    ...mapGetters([
+      'serverUrl', 'userInformation',
+    ]),
+  },
+  methods: {
+    addToAPI() {
+      console.log(this.userInformations);
+
+      axios.post(`${this.serverUrl}users/authenticate`, this.userInformations)
+        .then((res) => {
+          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    submit() {
+      this.$v.$touch();
+    },
+    clear() {
+      this.$v.$reset();
+      this.email = '';
+      this.password = '';
+    },
+  },
+};
 </script>
 
 <style>

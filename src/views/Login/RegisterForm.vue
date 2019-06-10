@@ -77,7 +77,7 @@ export default {
     addToAPI() {
       console.log(this.userInformations);
 
-      axios.post(`${this.serverUrl}user/register`, this.userInformations)
+      axios.post(`${this.serverUrl}users/register`, this.userInformations)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
           console.log(res);

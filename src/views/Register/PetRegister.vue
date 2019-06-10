@@ -68,7 +68,7 @@
           <v-card-actions>
             <v-btn block color="primary" @click="clear">Clear</v-btn>
             <!-- <v-btn block color="primary" @click="addToAPI">Ok</v-btn> -->
-            <v-btn block color="primary" @click='addToAPI' to="/deviceRegister" >Next</v-btn>
+            <v-btn block color="primary" @click='addToAPI'>Next</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
