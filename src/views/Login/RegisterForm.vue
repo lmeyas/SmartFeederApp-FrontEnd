@@ -50,16 +50,10 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate';
-import { required, maxLength, email } from 'vuelidate/lib/validators';
+import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
-  mixins: [validationMixin],
-  validations: {
-    name: { required, maxLength: maxLength(10) },
-    email: { required, email },
-  },
-
   data: () => ({
     valid: false,
     name: '',
@@ -75,11 +69,33 @@ export default {
     showPassword: false,
     passwordRules: {
       required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Min 8 characters',
-      passwordMatch: () => 'Password must be less than 10 characters',
+      min: v => v.length >= 6 || 'Min 6 characters',
+      passwordMatch: () => 'Password must be at lest than 6 characters',
+    },
+    userInformations: {
+      name: '',
+      email: '',
+      password: '',
     },
   }),
+  computed: {
+    ...mapGetters([
+      'serverUrl', 'userInformation',
+    ]),
+  },
   methods: {
+    addToAPI() {
+      console.log(this.userInformations);
+
+      axios.post(`${this.serverUrl}user/register`, this.userInformations)
+        .then((res) => {
+          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     submit() {
       this.$v.$touch();
     },
