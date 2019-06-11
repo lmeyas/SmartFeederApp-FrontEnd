@@ -121,9 +121,10 @@ export default {
     addToAPI() {
       console.log(this.petInformations);
 
-      axios.post(`${this.serverUrl}pets/register`, this.petInformations)
+      axios.post(`${this.serverUrl}pet/insert`, this.petInformations)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          this.$router.push('/deviceRegister');
           console.log(res);
         })
         .catch((error) => {

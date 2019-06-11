@@ -44,7 +44,7 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   data: () => ({
@@ -72,14 +72,19 @@ export default {
     ...mapGetters([
       'serverUrl',
     ]),
+    ...mapActions([
+      'updateUserInformation',
+    ]),
   },
+
   methods: {
     addToAPI() {
       console.log(this.userInformations);
 
-      axios.post(`${this.serverUrl}users/register`, this.userInformations)
+      axios.post(`${this.serverUrl}user/insert`, this.userInformations)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          this.$router.push('/petRegister');
           console.log(res);
         })
         .catch((error) => {

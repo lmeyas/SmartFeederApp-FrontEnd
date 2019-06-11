@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userInformation: [],
-    serverUrl: ('http://localhost:5000/'),
+    serverUrl: ('http://localhost:5000/api/v1/'),
   },
   getters: {
     serverUrl: state => state.serverUrl,

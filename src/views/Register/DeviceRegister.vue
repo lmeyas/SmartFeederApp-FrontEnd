@@ -186,9 +186,10 @@ export default {
     addToAPI() {
       console.log(this.mealList);
 
-      axios.post(`${this.serverUrl}devices/register`, { mealList: this.mealList })
+      axios.post(`${this.serverUrl}device/insert`, { mealList: this.mealList })
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          this.$router.push('/dashboard');
           console.log(res);
         })
         .catch((error) => {

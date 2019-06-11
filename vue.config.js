@@ -5,7 +5,7 @@ module.exports = {
   pluginOptions: {
     cordovaPath: 'src-cordova',
   },
-  outputDir: path.resolve(__dirname, '../SmartFeederApp-Server/public'),
+  outputDir: path.resolve(__dirname, '../SmartFeederApp-Server-Cloudant-/public'),
   filenameHashing: false,
   // assetsDir: "../../static/SPA"
 };

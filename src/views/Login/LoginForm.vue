@@ -29,7 +29,7 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 
 export default {
@@ -37,21 +37,25 @@ export default {
     valid: false,
     userInformations: {
       email: '',
-      passoword: '',
+      password: '',
     },
   }),
   computed: {
     ...mapGetters([
       'serverUrl', 'userInformation',
     ]),
+    ...mapActions([
+      'updateUserInformation',
+    ]),
   },
   methods: {
     addToAPI() {
       console.log(this.userInformations);
 
-      axios.post(`${this.serverUrl}users/authenticate`, this.userInformations)
+      axios.post(`${this.serverUrl}user/retrieve`, this.userInformations)
         .then((res) => {
-          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          // COLOCAR AQUI A PARTE DE IR PARA A PAGINA DE DASHBOARD
+          this.$router.push('/dashboard');
           console.log(res);
         })
         .catch((error) => {
