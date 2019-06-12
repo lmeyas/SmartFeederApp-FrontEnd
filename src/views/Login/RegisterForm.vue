@@ -24,7 +24,6 @@
                 v-model="userInformations.password"
                 prepend-icon="lock"
                 label="Password"
-                :rules="passwordMatch"
                 :append-icon="showPassword ? 'visibility' : 'visibility_off'"
                 :type="showPassword ? 'text' : 'password'"
                 counter
@@ -70,20 +69,22 @@ export default {
   }),
   computed: {
     ...mapGetters([
-      'serverUrl',
-    ]),
-    ...mapActions([
-      'updateUserInformation',
+      'serverUrl', 'userInformation',
     ]),
   },
 
   methods: {
-    addToAPI() {
-      console.log(this.userInformations);
+    ...mapActions([
+      'updateUserInformation',
+    ]),
 
+    addToAPI() {
       axios.post(`${this.serverUrl}user/insert`, this.userInformations)
         .then((res) => {
-          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
+          this.updateUserInformation(this.userInformations.email);
+          console.log(88882, this.userInformation);
+          console.log(3, this.userInformations.email);
+
           this.$router.push('/petRegister');
           console.log(res);
         })

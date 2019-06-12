@@ -120,8 +120,8 @@ export default {
   methods: {
     addToAPI() {
       console.log(this.petInformations);
-
-      axios.post(`${this.serverUrl}pet/insert`, this.petInformations)
+      const info = { petInformations: this.petInformations, userEmail: this.userInformation };
+      axios.post(`${this.serverUrl}pet/insert`, info)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
           this.$router.push('/deviceRegister');

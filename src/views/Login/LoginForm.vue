@@ -42,19 +42,20 @@ export default {
   }),
   computed: {
     ...mapGetters([
-      'serverUrl', 'userInformation',
-    ]),
-    ...mapActions([
-      'updateUserInformation',
+      'serverUrl',
     ]),
   },
   methods: {
-    addToAPI() {
-      console.log(this.userInformations);
+    ...mapActions([
+      'updateUserInformation',
+    ]),
 
+    addToAPI() {
       axios.post(`${this.serverUrl}user/retrieve`, this.userInformations)
         .then((res) => {
-          // COLOCAR AQUI A PARTE DE IR PARA A PAGINA DE DASHBOARD
+          this.updateUserInformation(this.userInformations.email);
+          console.log(2, this.userInformation);
+
           this.$router.push('/dashboard');
           console.log(res);
         })

@@ -3,15 +3,11 @@
     <v-toolbar flat color="white">
       <v-toolbar-title>Refeições Programadas</v-toolbar-title>
     </v-toolbar>
-    <v-data-table :headers="headers" :items="meals" class="elevation-1" hide-actions="true">
-      <!--v-data-table
-      :headers="headers"
-      :items="desserts"
-      class="elevation-1"
-      -->
+    <v-data-table :headers="headers" :items="meals" class="elevation-1">
       <template v-slot:items="props">
         <td class="justify-center pl-5">
-          <img src="../../../assets/images/food_time/bone_green.png" alt="ucc_payment">
+          <img v-if="Number(itsTime) >= Number(props.item.time.replace(':', ''))" src="../../../assets/images/food_time/bone_green.png" alt="ucc_payment">
+          <img v-else src="../../../assets/images/food_time/bone_red.png" alt="ucc_payment">
         </td>
         <td class="text-xs-left">{{ props.item.time }}</td>
         <td class="text-xs-left">{{ props.item.quantity }}</td>
@@ -42,6 +38,7 @@ export default {
     ],
     meals: [],
     editedIndex: -1,
+    itsTime: '',
   }),
 
   computed: {
@@ -51,12 +48,17 @@ export default {
   },
 
   mounted() {
-    axios.get(`${this.serverUrl}device/retrieve`).then((res) => {
-      this.results = res.data;
-      console.log(this.results);
-    }).catch((err) => {
-      console.log(err);
-    });
+    if (this.userInformation === '') {
+      this.$router.push('/');
+    } else {
+      this.itsTime = new Date(Date.now()).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3').replace(':', '');
+
+      axios.post(`${this.serverUrl}device/retrieve`, { userEmail: this.userInformation }).then((res) => {
+        this.meals = res.data.meal_information;
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   },
 };
 </script>
