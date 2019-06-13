@@ -185,8 +185,9 @@ export default {
 
     addToAPI() {
       console.log(this.mealList);
+      const info = { mealList: this.mealList, userEmail: this.userInformation };
 
-      axios.post(`${this.serverUrl}device/insert`, { mealList: this.mealList })
+      axios.post(`${this.serverUrl}device/insert`, info)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
           this.$router.push('/dashboard');
