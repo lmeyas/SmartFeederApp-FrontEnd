@@ -44,7 +44,6 @@
               >
 
                 <template v-slot:activator="{ on }">
-                  <!-- <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn> -->
                   <v-btn
                     fab
                     small
@@ -121,7 +120,6 @@
               </template>
             </v-data-table>
             <div class="text-xs-center pt-2">
-             <!-- <v-btn block color="primary dark" to="/dashboard">Ok</v-btn> -->
              <v-btn block color="primary dark" @click="addToAPI">Ok</v-btn>
             </div>
           </div>
@@ -180,11 +178,8 @@ export default {
   methods: {
     addMealList() {
       this.mealList.push(this.mealInformations);
-      // this.mealInformations.time = '';
-      // this.mealInformations.quantity = '';
       this.dialog = !this.dialog;
       console.log(this.mealList);
-      // this.$refs.form.reset();
     },
 
     addToAPI() {
@@ -193,7 +188,6 @@ export default {
 
       axios.post(`${this.serverUrl}device/insert`, info)
         .then((res) => {
-          // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
           this.$router.push('/medicineRegister');
           console.log(res);
         })
