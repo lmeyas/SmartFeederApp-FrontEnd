@@ -37,14 +37,13 @@
               flat
               color="white"
             >
-              <v-toolbar-title>Registro do Comedouro</v-toolbar-title>
+              <v-toolbar-title>Registro do Medicamentos</v-toolbar-title>
               <v-dialog
                 v-model="dialog"
                 max-width="500px"
               >
 
                 <template v-slot:activator="{ on }">
-                  <!-- <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn> -->
                   <v-btn
                     fab
                     small
@@ -62,7 +61,7 @@
                 <v-form v-model="valid"  ref="form">
                 <v-card>
                   <v-card-title>
-                    <span class="headline">Registro de Refeição</span>
+                    <span class="headline">Registro de Medicamento</span>
                   </v-card-title>
 
                   <v-card-text>
@@ -74,8 +73,8 @@
                           md4
                         >
                           <v-text-field
-                            v-model="mealInformations.time"
-                            label="Horário"
+                            v-model="medicineInformations.name"
+                            label="Nome do medicamento"
 
                           ></v-text-field>
                         </v-flex>
@@ -85,8 +84,18 @@
                           md4
                         >
                           <v-text-field
-                            v-model="mealInformations.quantity"
-                            label="Quantidade (g)"
+                            v-model="medicineInformations.lastApp"
+                            label="Última aplicação"
+                          ></v-text-field>
+                        </v-flex>
+                        <v-flex
+                          xs12
+                          sm6
+                          md4
+                        >
+                          <v-text-field
+                            v-model="medicineInformations.nextApp"
+                            label="Próxima aplicação"
                           ></v-text-field>
                         </v-flex>
                       </v-layout>
@@ -102,7 +111,7 @@
                     <v-btn
                       color="blue darken-1"
                       flat
-                      @click="addMealList"
+                      @click="addMedicineList"
                     >Save</v-btn>
                   </v-card-actions>
                 </v-card>
@@ -111,17 +120,17 @@
             </v-toolbar>
             <v-data-table
               :headers="headers"
-              :items="mealList"
+              :items="medicineList"
               class="elevation-1"
               hide-actions
             >
               <template v-slot:items="props">
-                <td class="text-xs-left">{{ props.item.time }}</td>
-                <td class="text-xs-center">{{ props.item.quantity }}</td>
+                <td class="text-xs-left">{{ props.item.name }}</td>
+                <td class="text-xs-center">{{ props.item.lastApp }}</td>
+                <td class="text-xs-center">{{ props.item.nextApp }}</td>
               </template>
             </v-data-table>
             <div class="text-xs-center pt-2">
-             <!-- <v-btn block color="primary dark" to="/dashboard">Ok</v-btn> -->
              <v-btn block color="primary dark" @click="addToAPI">Ok</v-btn>
             </div>
           </div>
@@ -141,27 +150,35 @@ export default {
     valid: false,
     headers: [
       {
-        text: 'Horário',
+        text: 'Nome',
         align: 'left',
         sortable: false,
-        value: 'time',
+        value: 'name',
       },
       {
-        text: 'Quantidade (g)',
+        text: 'Última aplicação',
         align: 'left',
         sortable: false,
-        value: 'qtt',
+        value: 'lastApp',
+      },
+      {
+        text: 'Próxima Aplicação',
+        align: 'left',
+        sortable: false,
+        value: 'nextApp',
       },
     ],
     editedIndex: -1,
-    mealInformations: {
-      time: 'hh:mm',
-      quantity: 0,
+    medicineInformations: {
+      name: '',
+      lastApp: 'dd/mm/aaaa',
+      nextApp: 'dd/mm/aaaa',
     },
-    mealList: [],
+    medicineList: [],
     defaultItem: {
-      time: 'hh:mm',
-      quantity: 0,
+      name: '',
+      lastApp: 'dd/mm/aaaa',
+      nextApp: 'dd/mm/aaaa',
     },
   }),
 
@@ -178,23 +195,20 @@ export default {
   },
 
   methods: {
-    addMealList() {
-      this.mealList.push(this.mealInformations);
-      // this.mealInformations.time = '';
-      // this.mealInformations.quantity = '';
+    addMedicineList() {
+      this.medicineList.push(this.medicineInformations);
       this.dialog = !this.dialog;
-      console.log(this.mealList);
-      // this.$refs.form.reset();
+      console.log(this.medicineList);
     },
 
     addToAPI() {
-      console.log(this.mealList);
-      const info = { mealList: this.mealList, userEmail: this.userInformation };
+      console.log(this.medicineList);
+      const info = { medicineList: this.medicineList, userEmail: this.userInformation };
 
-      axios.post(`${this.serverUrl}device/insert`, info)
+      axios.post(`${this.serverUrl}medicine/insert`, info)
         .then((res) => {
           // COLOCAR AQUI A PARTE DE IR PRA PROXIMA PAGINA
-          this.$router.push('/medicineRegister');
+          this.$router.push('/dashboard');
           console.log(res);
         })
         .catch((error) => {
@@ -205,16 +219,16 @@ export default {
     close() {
       this.dialog = false;
       setTimeout(() => {
-        this.mealInformations = Object.assign({}, this.defaultItem);
+        this.medicineInformations = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       }, 300);
     },
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.mealList[this.editedIndex], this.mealInformations);
+        Object.assign(this.medicineList[this.editedIndex], this.medicineInformations);
       } else {
-        this.mealList.push(this.mealInformations);
+        this.medicineList.push(this.medicineInformations);
       }
       this.close();
     },

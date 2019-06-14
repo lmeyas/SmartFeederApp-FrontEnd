@@ -2,129 +2,17 @@
   <div>
     <v-layout row wrap>
       <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">VACINA V8</v-card-text>
+        <v-card v-for="medicine in medicines" :key="medicine.id" id="medicineCard" class="medicineCard">
+          <v-card-text style="font-size: 1.5em;">{{ medicine.name }}</v-card-text>
           <v-divider/>
           <v-card-actions>
             <v-container grid-list-md text-xs-center>
               <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
+              <p class="textFont">{{ medicine.lastApp }}</p>
             </v-container>
             <v-container grid-list-md text-xs-center>
               <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">VACINA V10</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Antirrábica</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Eptospirose</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Leishmaniose</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Tosse dos Canis</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Carrapaticida</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
-            </v-container>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex class="my-2 ml-3">
-        <v-card id="medicineCard" class="medicineCard">
-          <v-card-text style="font-size: 1.5em;">Vermicida</v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/lastMedicine.png" height="35px">
-              <p class="textFont">15/04/2018</p>
-            </v-container>
-            <v-container grid-list-md text-xs-center>
-              <img src="../../../assets/images/medicine/nextMedicine.png" height="35px">
-              <p class="textFont">15/04/2019</p>
+              <p class="textFont">{{ medicine.nextApp }}</p>
             </v-container>
           </v-card-actions>
         </v-card>
@@ -134,21 +22,32 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters } from 'vuex';
+
 export default {
   data: () => ({
-    bones: [
-      {
-        url_active: '../../../assets/images/rate_icon/bone_icon_active.png',
-        url_inactive: '../../../assets/images/rate_icon/bone_icon_inactive.png',
-      },
-    ],
-    waterDrop: [
-      {
-        url_active: '../../../assets/images/rate_icon/drop_icon_active.png',
-        url_inactive: '../../../assets/images/rate_icon/drop_icon_inactive.png',
-      },
-    ],
+    medicines: [],
   }),
+
+  computed: {
+    ...mapGetters([
+      'serverUrl', 'userInformation',
+    ]),
+  },
+
+  mounted() {
+    if (this.userInformation === '') {
+      this.$router.push('/');
+    } else {
+      axios.post(`${this.serverUrl}medicine/retrieve`, { userEmail: this.userInformation }).then((res) => {
+        console.log(this.medicines);
+        this.medicines = res.data.medicine_information;
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  },
 };
 </script>
 

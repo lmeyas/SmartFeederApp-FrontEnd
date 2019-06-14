@@ -10,10 +10,10 @@
       <v-icon>favorite</v-icon>
     </v-btn>
 
-    <v-btn color="secondary" flat value="Settings" to="/settings">
+    <!-- <v-btn color="secondary" flat value="Settings" to="/settings">
       <span>Settings</span>
       <v-icon>settings</v-icon>
-    </v-btn>
+    </v-btn> -->
   </v-bottom-nav>
 </template>
 <script>

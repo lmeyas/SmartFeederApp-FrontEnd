@@ -7,6 +7,7 @@ import Login from '@/views/Login/LoginForm.vue';
 import CreateAccount from '@/views/Login/RegisterForm.vue';
 import PetRegister from '@/views/Register/PetRegister.vue';
 import DeviceRegister from '@/views/Register/DeviceRegister.vue';
+import MedicineRegister from '@/views/Register/MedicineRegister.vue';
 
 Vue.use(Router);
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/deviceRegister',
       name: 'Device Register',
       component: DeviceRegister,
+    },
+    {
+      path: '/medicineRegister',
+      name: 'Medicine Register',
+      component: MedicineRegister,
     },
     {
       path: '/dashboard',
