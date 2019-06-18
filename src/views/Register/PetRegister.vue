@@ -86,23 +86,23 @@ export default {
     name: '',
     items: ['Gato', 'Cachorro'],
     nameRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters',
+      v => !!v || 'Nome é obrigatório',
+      v => v.length >= 2 || 'Nome deve ter pelo menos 2 caracteres',
     ],
     breed: '',
     breedRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 3 || 'Name must be less than 3 characters',
+      v => !!v || 'Raça é obrigatório',
+      v => v.length >= 2 || 'Raça deve ter pelo menos 2 caracteres',
     ],
     age: '',
     ageRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 1 || 'Name must be less than 1 characters',
+      v => !!v || 'Idade é obrigatório',
+      v => v.length >= 1 || 'Idade deve ter pelo menos 1 caracteres',
     ],
     weight: '',
     weightRules: [
-      v => !!v || 'Weight is required',
-      v => v.length <= 2 || 'Weight must be less than 2 characters',
+      v => !!v || 'Peso é obrigatório',
+      v => v.length >= 1 || 'Peso deve ter pelo menos 1 caracteres',
     ],
     petInformations: {
       specie: '',
