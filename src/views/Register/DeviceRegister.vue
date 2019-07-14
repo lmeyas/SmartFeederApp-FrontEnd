@@ -11,8 +11,8 @@
     >
       <div class="pl-2">
         <v-toolbar-title>
-          <span>Smart</span>
-          <span class="font-weight-light">FEEDER</span>
+          <span>Pet</span>
+          <span class="font-weight-light">CARE</span>
         </v-toolbar-title>
       </div>
       <div class="mr-4">
